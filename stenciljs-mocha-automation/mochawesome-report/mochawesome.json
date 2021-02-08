@@ -1,0 +1,310 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 8,
+    "passes": 5,
+    "pending": 3,
+    "failures": 0,
+    "start": "2021-02-08T11:21:05.438Z",
+    "end": "2021-02-08T11:23:10.607Z",
+    "duration": 125169,
+    "testsRegistered": 8,
+    "passPercent": 100,
+    "pendingPercent": 37.5,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "efd5a30e-6c92-42c2-bcda-1fea9ee1c8f3",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [
+        {
+          "title": "\"before all\" hook in \"{root}\"",
+          "fullTitle": "\"before all\" hook in \"{root}\"",
+          "timedOut": false,
+          "duration": 13113,
+          "state": null,
+          "speed": null,
+          "pass": false,
+          "fail": false,
+          "pending": false,
+          "context": null,
+          "code": "await puppeteer.registerCustomQueryHandler('shadow', QueryHandler);\n  global.expect = expect;\n  global.browser = await puppeteer.launch(opts);",
+          "err": {},
+          "uuid": "e8aa9989-a66a-43ec-945c-c5b7c47af773",
+          "parentUUID": "efd5a30e-6c92-42c2-bcda-1fea9ee1c8f3",
+          "isHook": true,
+          "skipped": false
+        }
+      ],
+      "afterHooks": [
+        {
+          "title": "\"after all\" hook in \"{root}\"",
+          "fullTitle": "\"after all\" hook in \"{root}\"",
+          "timedOut": false,
+          "duration": 27,
+          "state": null,
+          "speed": null,
+          "pass": false,
+          "fail": false,
+          "pending": false,
+          "context": null,
+          "code": "browser.close();\nsetTimeout( () => { cmd.run('node server.js');}, 5000);    \nsetTimeout(() => {opn('http://localhost:9988');}, 2000);\nglobal.browser = globalVariables.browser;\nglobal.expect = globalVariables.expect;",
+          "err": {},
+          "uuid": "ff585c99-d491-4233-8b8e-f1940a84507c",
+          "parentUUID": "efd5a30e-6c92-42c2-bcda-1fea9ee1c8f3",
+          "isHook": true,
+          "skipped": false
+        }
+      ],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3a78452c-15e5-43e2-8ec0-c2acb8e55e14",
+          "title": "MSB Web Sign in / Sign Up ",
+          "fullFile": "D:\\New_automation\\stenciljs-mocha-automation\\test\\sample.code2.js",
+          "file": "\\test\\sample.code2.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"MSB Web Sign in / Sign Up \"",
+              "fullTitle": "MSB Web Sign in / Sign Up  \"before all\" hook in \"MSB Web Sign in / Sign Up \"",
+              "timedOut": false,
+              "duration": 42460,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/* Before hook for mocha testing, This code will be executed before each testcases */\n\t\tpage = await browser.newPage(); // Opened new tab \n\t\t//page.on('console', consoleObj => console.log(consoleObj.text())); // To display console log inside evaluate function\n\t\tawait page.goto(URL, {\n\t\t\twaitUntil: 'networkidle2',\n\t\t\t// Remove the timeout\n\t\t\ttimeout: 0\n\t\t});\n\t\tawait page.setDefaultTimeout(50000);\n\t\tawait page.setDefaultNavigationTimeout(50000);",
+              "err": {},
+              "uuid": "ae09d40b-c372-4d71-9d7d-ae8074073d74",
+              "parentUUID": "3a78452c-15e5-43e2-8ec0-c2acb8e55e14",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after all\" hook in \"MSB Web Sign in / Sign Up \"",
+              "fullTitle": "MSB Web Sign in / Sign Up  \"after all\" hook in \"MSB Web Sign in / Sign Up \"",
+              "timedOut": false,
+              "duration": 134,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/* After hook for mocah testing, This code will be executed after each testcases */\n\t\tawait page.close();",
+              "err": {},
+              "uuid": "f4e0b4a2-8f42-4c8f-b31b-2fb4b298185e",
+              "parentUUID": "3a78452c-15e5-43e2-8ec0-c2acb8e55e14",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "TC-1112 *** Accept cookies and click on more information",
+              "fullTitle": "MSB Web Sign in / Sign Up  TC-1112 *** Accept cookies and click on more information",
+              "timedOut": false,
+              "duration": 2295,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var messages = []; // Declared messages array to hold the errors\ntry { // Try for privecy popup\n\t// Waited for app-prvary tag to load\n\tawait page.waitForSelector(\"app-privacy\", {\n\t\tvisible: true,\n\t  });\n    const privacyPopup = await page.$(\"app-privacy\");  //locate app privacy pop-up\n\ttry { \n\t\tawait page.waitForSelector(\"shadow/div.privacy-message-button-container\", {\n\t\t\tvisible: true,\n\t\t  });\n\t\tconst container = await page.$(\"shadow/div.privacy-message-button-container\");\n\t\t//waited for accept button to load\n\t\tawait page.waitForSelector(\"shadow/together-button\", {\n\t\t\tvisible: true,\n\t\t  });\n\t\t\n\t\t//located ACCEPT button\n        const acceptBtn = await container.$$(\"shadow/together-button\");\n\t\tawait acceptBtn[0].click();  // Clicked ACCEPT button\n\t} catch (e) {\n\t\t// Error will be catch here if element for 'ACCEPT' button is not located, then adding error message to messages\n\t\tmessages.push(\"Unable to locate 'Aceept' button from privacy policy popup\");\n\t}\n\t\n\t\n} catch (e) {\n\t// Error will be catch here if element for 'Privacy Policy Popup' is not located, then adding error message to messages\n\tmessages.push(\"Privacy policy popup not displaying when cookie is cleared from the browser\");\n}\nerrormsg=\"\";\nmessages.forEach(function (item) {\n\terrormsg = errormsg + \" \" + item + \"\\n\";\n});\n\t\n// Assertion for error message\nexpect(errormsg).to.equal('')",
+              "err": {},
+              "uuid": "82279752-ee6b-45d5-9ffe-d2932ae194fe",
+              "parentUUID": "3a78452c-15e5-43e2-8ec0-c2acb8e55e14",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "*** Sign In page ",
+              "fullTitle": "MSB Web Sign in / Sign Up  *** Sign In page ",
+              "timedOut": false,
+              "duration": 5721,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var messages = []; // Declared messages array to hold the errors\ntry { // Try for privecy popup\n\t// Waited for app-prvary tag to load\n\tawait page.waitForSelector(\"shadow/div.desktop.right-pane\", {\n\t\tvisible: true,\n\t});\n\tconst headerRightPane = await page.$(\"shadow/div.desktop.right-pane\");  //locate right pane from the header\n\t//located login link from the header\n\ttry {\n\t\tconst loginLink = await headerRightPane.$(\"shadow/ion-router-link\");\n\t\tawait loginLink.click();  // Clicked Login link\n\t} catch (e) {\n\t\tmessages.push(\"Login link is missing on Sign In page in \" + app_name);\n\t}\n\t//located back link\t\n\tlet SignInArea = null;\n\ttry {\n\t\tawait page.waitForSelector(\"app-signin\", {\n\t\t\tvisible: true,\n\t\t});\n\t\tSignInArea = await page.$(\"app-signin\");\n\t\tawait page.waitForSelector(\"shadow/together-back-button\", {\n\t\t\tvisible: true,\n\t\t});\n\t\tconst backBtn = await SignInArea.$(\"shadow/together-back-button\");\n\t} catch (e) {\n\t\tmessages.push(\"Back button is missing on Sign In page in \" + app_name);\n\t}\n\t//located facebook link\n\ttry {\n\t\tawait page.waitForSelector(\"shadow/.facebook\", {\n\t\t\tvisible: true,\n\t\t});\n\t\tconst facebookButton = await SignInArea.$(\"shadow/.facebook\");\n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"Facebook button is missing on Sign In page in \" + app_name);\n\t}\n\t//located apple button\n\ttry {\n\t\tawait page.waitForSelector(\"shadow/.apple\", {\n\t\t\tvisible: true,\n\t\t});\n\t\tconst appleButton = await SignInArea.$(\"shadow/.apple\");\n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"Apple button is missing on Sign In page in \" + app_name);\n\t}\n\t//located google button\n\ttry {\n\t\tawait page.waitForSelector(\"shadow/.google\", {\n\t\t\tvisible: true,\n\t\t});\n\t\tconst googleButton = await SignInArea.$(\"shadow/.google\");\n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"Google button is missing on Sign In page in \" + app_name);\n\t}\n\ttry {\n\t\tawait page.waitForSelector(\"shadow/.signin-links together-highlight-text\", {\n\t\t\tvisible: true,\n\t\t});\n\t\tconst forgotLink = await SignInArea.$(\"shadow/.signin-links together-highlight-text\");\n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"Forgot Password link is missing on Sign In page in \" + app_name);\n\t}\n\ttry {\n\t\tawait page.waitForSelector(\"shadow/.signin-links ion-router-link\", {\n\t\t\tvisible: true,\n\t\t});\n\t\tconst signupLink = await SignInArea.$(\"shadow/.signin-links ion-router-link\");\n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"Sign up link is missing on Sign In page in \" + app_name);\n\t}\n\ttry {\n\t\tawait page.waitForSelector(\"shadow/div.footnotes > div:nth-child(2) > a:nth-child(1)\", {\n\t\t\tvisible: true,\n\t\t});\n\t\tconst privacyPolicy = await SignInArea.$(\"shadow/div.footnotes > div:nth-child(2) > a:nth-child(1)\");\n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"Privacy Policy link is missing on Sign In page in \" + app_name);\n\t}\n\ttry {\n\t\tawait page.waitForSelector(\"shadow/div.footnotes > div:nth-child(2) > a:nth-child(2)\", {\n\t\t\tvisible: true,\n\t\t});\n\t\tconst termsofUse = await SignInArea.$(\"shadow/div.footnotes > div:nth-child(2) > a:nth-child(2)\");\n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"Terms of use link is missing on Sign In page in \" + app_name);\n\t}\n}\ncatch (e) {\n\tconsole.log(e);\n\tmessages.push(\"SignIn container is missing in \" + app_name);\n}\n\nerrormsg = \"\";\nmessages.forEach(function (item) {\n\terrormsg = errormsg + \" \" + item + \"\\n\";\n});\n// Assertion for error message\nexpect(errormsg).to.equal('')",
+              "err": {},
+              "uuid": "65dbad7e-26d2-4725-a3eb-74bb8feaf906",
+              "parentUUID": "3a78452c-15e5-43e2-8ec0-c2acb8e55e14",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "***Email Sign Up page ",
+              "fullTitle": "MSB Web Sign in / Sign Up  ***Email Sign Up page ",
+              "timedOut": false,
+              "duration": 36133,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var messages = []; // Declared messages array to hold the errors\ntry { // Try for privacy popup\n\t// Waited for app-prvary tag to load\n\tawait page.waitForSelector(\"shadow/div.left-panel\", {\n\t\tvisible: true,\n\t});\n\tconst headerRightPane = await page.$(\"shadow/div.left-panel\");  //locate app privacy pop-up\n\tconst signupLink = await headerRightPane.$(\"shadow/ion-router-link\");\n\tawait signupLink.click();  // Clicked Sign Up button\n//\tawait page.waitForNavigation();\n\ttry {\n\t\tawait page.waitForSelector(\"app-registration\", {\n\t\t\tvisible: true,\n\t\t});\n\t\tconst headerLeftPane = await page.$(\"app-registration\");  //locate app privacy pop-up\n\t\t\n\t\ttry {\n\t\t\tawait page.waitForSelector(\"shadow/input[type = text]\", {\n\t\t\t\tvisible: true,\n\t\t\t});\n\t\t\t\n\t\t\tconst emailAddressPlaceHolder = await headerLeftPane.$(\"shadow/.together-form-prompt\");\n\t\t\tconst placeHolderText = await page.evaluate(emailAddressPlaceHolder => emailAddressPlaceHolder.innerText, emailAddressPlaceHolder);\n\t\t\t\n\t\t\t\n\t\t\tif (String(placeHolderText).indexOf(\"Enter your email address\") == -1) {\n\t\t\t\tmessages.push(\"placeholder txt inside EmailAddress fields is not as per spec  on \"+app_name+\" Web Home Page\");\n\t\t\t}\n\t\t\tconst emailAddress = await headerLeftPane.$(\"shadow/input[type = text]\");\n\t\t\tawait emailAddress.click();\n\t\t\tawait page.waitFor(3000);\n\t\t\n\t\t\tawait emailAddress.type(abc+\"@gmail.com\");\n\t\t} catch (e) {\n\t\t\tconsole.log(e);\n\t\t\tmessages.push(\"EmailAddress fields is missing in \" + app_name);\n\t\t}\n\t\t\n\t\ttry {\n\t\t\tawait page.waitForSelector(\"shadow/.input-button\", {\n\t\t\t\tvisible: true,\n\t\t\t});\n\t\t\tconst continueButton = await headerLeftPane.$(\"shadow/.input-button\");\n\t\t\tawait continueButton.click();\n\t\t\tawait page.waitForNavigation();\n\t\t\tawait page.waitFor(3000);\n\t\t} catch (e) {\n\t\t\tconsole.log(e);\n\t\t\tmessages.push(\"Continue button is missing in \" + app_name);\n\t\t}\n\t\ttry { //Sign Up second screen\n\t\t\t\n\t\t\tawait page.waitForSelector(\"app-registration:nth-child(3)\", {\n\t\t\t\tvisible: true,\n\t\t\t});\n\t \n\t\t\tconst headerLeftPane1 = await page.$(\"app-registration:nth-child(3)\");  //locate app privacy pop-up\n\t\t\t\n\t\t\t\t\t\t\t\n\t\t\ttry{\n\t\t\t\n\t\t\t\tconst password = await headerLeftPane1.$(\"shadow/input[type = password]\");\n\t\t\t\tawait password.type('12345678');\n\t\t\t\t} catch (e) {\n\t\t\t\t\tconsole.log(e);\n\t\t\t\t\tmessages.push(\"password field is missing in \" + app_name);\n\t\t\t\t}\n\t\t\ttry{\n\t\t\tconst userName = await headerLeftPane1.$$(\"shadow/input[type = text]\");\n\t\t\tawait userName[1].click({ clickCount: 1 });\n\t\t\tawait userName[1].type(abc);\n\t\t    } catch (e) {\n\t\t\t  console.log(e);\n\t\t\t  messages.push(\"Continue button is missing in \" + app_name);\n\t\t    }\n\t\t\ttry{\n\t\t\t    await page.waitForSelector(\"shadow/.together-dropdown-field\", {\n\t\t\t\t      visible: true,\n\t\t\t    });\n\n\t\t\t   const locationValue = await headerLeftPane1.$(\"shadow/.together-dropdown-field\");\n\t\t\t   await locationValue.click(); //click location drop down\n                try{\n\t\t\tawait page.waitForSelector(\"shadow/.single-select-menu-container\", {\n\t\t\t\tvisible: true,\n\t\t\t});\n\t\t\tconst headerLeftPane2 = await page.$(\"shadow/.single-select-menu-container\");\n\t\t\tconst countryValue = await headerLeftPane2.$(\"shadow/.radio-item\");\n\t\t\tawait countryValue.click(); //click 1st country radio button\n                try{\n\t\t\tconst submitButton = await headerLeftPane2.$(\"shadow/.button-container\");\n\t\t\tawait submitButton.click(); //submit button on location popup\n\t\t} catch (e) {\n\t\t\tconsole.log(e);\n\t\t\tmessages.push(\"Submit button is missing on location dropdown in \" + app_name);\n\t\t}\n\t\t} catch (e) {\n\t\t\tconsole.log(e);\n\t\t\tmessages.push(\"Location menu is not displaying on clicking location dropdown in \" + app_name);\n\t\t}\n\t\t    } catch (e) {\n\t\t\t    console.log(e);\n\t\t\t    messages.push(\"Location dropdown is missing in \" + app_name);\n\t\t    }\n\n                try{\n\t\t\tconst ageCheckbox = await headerLeftPane1.$(\"shadow/.checkbox-container\");\n\t\t\tawait ageCheckbox.click();\n\t\t} catch (e) {\n\t\t\tconsole.log(e);\n\t\t\tmessages.push(\"Are you 18 or Older? checkbox is missing on Sign Up STEP - 2 Screen \" + app_name);\n\t\t}\n\t\ttry{\n\t\t\tconst signupButton = await headerLeftPane1.$(\"shadow/.together-button\");\n\t\t\tawait signupButton.click();\n\t\t\tawait page.waitFor(5000);\n\t\t} catch (e) {\n\t\t\tconsole.log(e);\n\t\t\tmessages.push(\"Sign Up button is missing on Sign Up STEP - 2 Screen \" + app_name);\n\t\t}\n\n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"Sign Up STEP-2 scrren is missing in \" + app_name);\n\t}\n} catch (e) {\n\tconsole.log(e);\n\tmessages.push(\"Sign Up STEP-1 scrren is missing in \" + app_name);\n}\n//located login link from the header\ntry {\n\tawait page.goto(URL, {\nwaitUntil: 'networkidle2',\n// Remove the timeout\ntimeout: 0\n\t});\n} catch (e) {\n\t// Error will be catch here if element for 'Home' link is not located, then adding error message to messages\n\tmessages.push(\"Problem reloading the Page\");\n}\ntry {\n\tawait page.waitForSelector(\"shadow/div.desktop.right-pane\", {\nvisible: true,\n\t});\n\tconst headerRightPane = await page.$(\"shadow/div.desktop.right-pane\");  //locate right pane from the header\n\t\n\tconst logoutLink = await headerRightPane.$(\"shadow/.join-signin .together-highlight-text\");\n\tconst txtLogout = await page.evaluate(logoutLink => logoutLink.innerText, logoutLink);\n\tconsole.log(\"error message -->\" + txtLogout);\n\tif ((String(txtLogout).indexOf(\"Log out\") == -1)) {\nmessages.push(\"After Sign In Log In link is not replaced by Log Out link.\");\n\t}\n\tawait logoutLink.click();\n\t} catch (e) {\nconsole.log(e);\n\tmessages.push(\"Logout link is missing in header after Sign In \" + app_name);\n}\n} catch (e) {\n\tconsole.log(e);\n\tmessages.push(\"SignUp link is missing in \" + app_name);\n}\n\n\n\n\nerrormsg = \"\";\nmessages.forEach(function (item) {\n\terrormsg = errormsg + \" \" + item + \"\\n\";\n});\n// Assertion for error message\nexpect(errormsg).to.equal('')\nawait page.waitFor(5000);",
+              "err": {},
+              "uuid": "ef643ce6-a176-4c95-b073-b39a0d5fbeb8",
+              "parentUUID": "3a78452c-15e5-43e2-8ec0-c2acb8e55e14",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "*** Error Validation Email Sign In ",
+              "fullTitle": "MSB Web Sign in / Sign Up  *** Error Validation Email Sign In ",
+              "timedOut": false,
+              "duration": 14802,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var messages = []; // Declared messages array to hold the errors\n// Waited for app-prvary tag to load\nawait page.waitForSelector(\"shadow/div.desktop.right-pane\", {\n\tvisible: true,\n});\nconst headerRightPane = await page.$(\"shadow/div.desktop.right-pane\");  //locate right pane from the header\n//located login link from the header\ntry {\n\tconst loginLink = await headerRightPane.$(\"shadow/ion-router-link\");\n\tawait loginLink.click();  // Clicked Login link\n} catch (e) {\n\tmessages.push(\"Login link is missing on Sign In page in \" + app_name);\n}\n\ntry {\n\tawait page.waitForSelector(\"shadow/div.together-signin-container\", {\n\t\tvisible: true,\n\t});\n\tconst signinContainer = await page.$(\"shadow/div.together-signin-container\");\n\ttry { //locate email textbox\n\t\tconst emailAddress = await signinContainer.$(\"shadow/input[type = text]\");\n\t\tawait emailAddress.type('vfvdv@gmail.com'); //type email id \n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"EmailAddress field is missing \" + app_name);\n\t}\n\ttry {//locate password textbox\n\t\tconst password = await signinContainer.$(\"shadow/input[type = password]\");\n\t\tawait password.type('12345678'); //typed password\n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"Password field is missing \" + app_name);\n\t}\n\ttry {\n\t\tconst eyeIcon = await signinContainer.$(\"shadow/div.right-icon\");\n\t\tawait eyeIcon.click();\n\t\tconst typePass = await page.evaluate('document.querySelector(\"app-signin\").shadowRoot.querySelector(\"div.together-signin-container > together-input:nth-child(6)\").shadowRoot.querySelector(\"input\").getAttribute(\"type\")')\n\t\tif (String(typePass), indexOf(\"text\") !== -1) {\n\t\t\tmessages.push(\"Password is not visible on clicking eye icon \" + app_name);\n\t\t}\n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"Eye icon is missing \" + app_name);\n\t}\n\ttry {\n\t\tconst login = await signinContainer.$(\"shadow/together-button\");\n\t\tawait login.click();\n\n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"Login link is missing \" + app_name);\n\t}\n\tawait page.waitFor(5000);\n\ttry {\n\t\tawait page.waitForSelector(\"shadow/div.error-message\", {\n\t\t\tvisible: true,\n\t\t});\n\t\tconst errorMessage = await signinContainer.$(\"shadow/div.error-message\");\n\t\tconst txt = await page.evaluate(errorMessage => errorMessage.innerText, errorMessage);\n\t\t//const txt = await page.evaluate(errorMessage => errorMessage.textContent, errorMessage);\n\t\tconsole.log(\"error message -->\" + txt);\n\n\t\tif ((String(txt).indexOf(\"There was a problem logging you in.\") == -1) || (String(txt).indexOf(\"Email / password combination is not valid.\") == -1)) {\n\t\t\tmessages.push(\"Error message is not as per Spec\");\n\t\t}\n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"Error message is missing \" + app_name);\n\t}\n\tawait page.waitFor(5000);\n\n\n} catch (e) {\n\t//s\n\tconsole.log(e);\n\tmessages.push(\"SignIn container is missing \" + app_name);\n}\n\nerrormsg = \"\";\nmessages.forEach(function (item) {\n\terrormsg = errormsg + \" \" + item + \"\\n\";\n});\n// Assertion for error message\nexpect(errormsg).to.equal('')",
+              "err": {},
+              "uuid": "5c221a4e-b06e-42e6-bdfe-2a2c37a05235",
+              "parentUUID": "3a78452c-15e5-43e2-8ec0-c2acb8e55e14",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "*** Email Sign In flow ",
+              "fullTitle": "MSB Web Sign in / Sign Up  *** Email Sign In flow ",
+              "timedOut": false,
+              "duration": 10449,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var messages = []; // Declared messages array to hold the errors\ntry {\n\tawait page.waitForSelector(\"shadow/div.together-signin-container\", {\n\t\tvisible: true,\n\t});\n\tconst signinContainer = await page.$(\"shadow/div.together-signin-container\");\n\ttry {\n\t\tconst emailAddress = await signinContainer.$(\"shadow/input[type = text]\");\n\t\tawait emailAddress.click({ clickCount: 3 });\n\t\tawait emailAddress.press('Backspace');\n\t\tawait emailAddress.type(abc+\"@gmail.com\");\n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"EmailAddress field is missing \" + app_name);\n\t}\n\ttry {\n\t\tconst password = await page.$$(\"shadow/input\");\n\t\tawait password[1].click({ clickCount: 3 });\n\t\tawait password[1].press('Backspace');\n\t\tawait password[1].type('12345678');\n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"Password is missing \" + app_name);\n\t}\n\tconst eyeIcon = await signinContainer.$(\"shadow/div.right-icon\");\n\tawait eyeIcon.click();\n\ttry {\n\t\tconst login = await signinContainer.$(\"shadow/together-button\");\n\t\tawait login.click();\n\t} catch (e) {\n\t\tconsole.log(e);\n\t\tmessages.push(\"Login button is missing \" + app_name);\n\t}\n\n//located login link from the header\nawait page.waitFor(5000);\ntry {\n\tawait page.waitForSelector(\"shadow/div.desktop.right-pane\", {\nvisible: true,\n\t});\n\tconst headerRightPane = await page.$(\"shadow/div.desktop.right-pane\");  //locate right pane from the header\n\t\n\tconst logoutLink = await headerRightPane.$(\"shadow/.join-signin .together-highlight-text\");\n\tconst txtLogout = await page.evaluate(logoutLink => logoutLink.innerText, logoutLink);\n\tconsole.log(\"error message -->\" + txtLogout);\n\tif ((String(txtLogout).indexOf(\"Log out\") == -1)) {\nmessages.push(\"After Sign In Log In link is not replaced by Log Out link.\");\n\t}\n\tawait logoutLink.click();\n\t} catch (e) {\nconsole.log(e);\n\tmessages.push(\"Logout link is missing in header after Sign In \" + app_name);\n}\n} catch (e) {\n\tconsole.log(e);\n\tmessages.push(\"SignIn container is missing \" + app_name);\n}\nerrormsg = \"\";\nmessages.forEach(function (item) {\n\terrormsg = errormsg + \" \" + item + \"\\n\";\n});\nexpect(errormsg).to.equal('')",
+              "err": {},
+              "uuid": "f79bd229-ab3e-42bf-8dc7-3ab5459d131d",
+              "parentUUID": "3a78452c-15e5-43e2-8ec0-c2acb8e55e14",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "*** Google Sign In flow ",
+              "fullTitle": "MSB Web Sign in / Sign Up  *** Google Sign In flow ",
+              "timedOut": false,
+              "duration": 0,
+              "state": "pending",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": true,
+              "context": null,
+              "code": "",
+              "err": {},
+              "uuid": "815d355e-4110-4078-ad49-a96df5d183d7",
+              "parentUUID": "3a78452c-15e5-43e2-8ec0-c2acb8e55e14",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "*** Apple Sign In flow ",
+              "fullTitle": "MSB Web Sign in / Sign Up  *** Apple Sign In flow ",
+              "timedOut": false,
+              "duration": 0,
+              "state": "pending",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": true,
+              "context": null,
+              "code": "",
+              "err": {},
+              "uuid": "c0e65d74-a156-48ef-8992-8758f274c981",
+              "parentUUID": "3a78452c-15e5-43e2-8ec0-c2acb8e55e14",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "*** Log out",
+              "fullTitle": "MSB Web Sign in / Sign Up  *** Log out",
+              "timedOut": false,
+              "duration": 0,
+              "state": "pending",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": true,
+              "context": null,
+              "code": "",
+              "err": {},
+              "uuid": "6a99afaa-08ca-4fbd-b165-f3dcd4917063",
+              "parentUUID": "3a78452c-15e5-43e2-8ec0-c2acb8e55e14",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "82279752-ee6b-45d5-9ffe-d2932ae194fe",
+            "65dbad7e-26d2-4725-a3eb-74bb8feaf906",
+            "ef643ce6-a176-4c95-b073-b39a0d5fbeb8",
+            "5c221a4e-b06e-42e6-bdfe-2a2c37a05235",
+            "f79bd229-ab3e-42bf-8dc7-3ab5459d131d"
+          ],
+          "failures": [],
+          "pending": [
+            "815d355e-4110-4078-ad49-a96df5d183d7",
+            "c0e65d74-a156-48ef-8992-8758f274c981",
+            "6a99afaa-08ca-4fbd-b165-f3dcd4917063"
+          ],
+          "skipped": [],
+          "duration": 69400,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 90000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 90000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "8.2.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.1"
+    },
+    "marge": {
+      "options": null,
+      "version": "5.1.0"
+    }
+  }
+}
