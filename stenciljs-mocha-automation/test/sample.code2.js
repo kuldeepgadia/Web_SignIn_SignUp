@@ -82,8 +82,8 @@ describe(app_name + ' Web Sign in / Sign Up ', async () => { // Started to new t
 			// Remove the timeout
 			timeout: 0
 		});
-		await page.setDefaultTimeout(50000);
-		await page.setDefaultNavigationTimeout(50000);
+		await page.setDefaultTimeout(30000);
+		await page.setDefaultNavigationTimeout(30000);
 	});
 
 	after(async function () { /* After hook for mocah testing, This code will be executed after each testcases */
@@ -94,7 +94,6 @@ describe(app_name + ' Web Sign in / Sign Up ', async () => { // Started to new t
 		var messages = []; // Declared messages array to hold the errors
 		try { // Try for privecy popup
 
-			// Waited for app-prvary tag to load
 			await page.waitForSelector("app-privacy", {
 				visible: true,
 			  });
@@ -105,14 +104,14 @@ describe(app_name + ' Web Sign in / Sign Up ', async () => { // Started to new t
 				  });
 				const container = await page.$("shadow/div.privacy-message-button-container");
 				//waited for accept button to load
-				await page.waitForSelector("shadow/together-button", {
+				await page.waitForSelector("shadow/.together-button", {
 					visible: true,
 				  });
 				
 
 				//located ACCEPT button
-		        const acceptBtn = await container.$$("shadow/together-button");
-				await acceptBtn[0].click();  // Clicked ACCEPT button
+		        const acceptBtn = await container.$("shadow/.together-button");
+				await acceptBtn.click();  // Clicked ACCEPT button
 			} catch (e) {
 				// Error will be catch here if element for 'ACCEPT' button is not located, then adding error message to messages
 				messages.push("Unable to locate 'Aceept' button from privacy policy popup");
@@ -120,6 +119,7 @@ describe(app_name + ' Web Sign in / Sign Up ', async () => { // Started to new t
 	
 			
 		} catch (e) {
+			console.log(e);
 			// Error will be catch here if element for 'Privacy Policy Popup' is not located, then adding error message to messages
 			messages.push("Privacy policy popup not displaying when cookie is cleared from the browser");
 		}
@@ -133,141 +133,21 @@ describe(app_name + ' Web Sign in / Sign Up ', async () => { // Started to new t
 		expect(errormsg).to.equal('')
 		});
 
-	it('*** Sign In page ', async () => {
-		var messages = []; // Declared messages array to hold the errors
-		try { // Try for privecy popup
-
-			// Waited for app-prvary tag to load
-			await page.waitForSelector("shadow/div.desktop.right-pane", {
-				visible: true,
-			});
-			const headerRightPane = await page.$("shadow/div.desktop.right-pane");  //locate right pane from the header
-
-			//located login link from the header
-			try {
-				const loginLink = await headerRightPane.$("shadow/ion-router-link");
-				await loginLink.click();  // Clicked Login link
-			} catch (e) {
-				messages.push("Login link is missing on Sign In page in " + app_name);
-			}
-
-			//located back link	
-			let SignInArea = null;
-			try {
-				await page.waitForSelector("app-signin", {
-					visible: true,
-				});
-				SignInArea = await page.$("app-signin");
-				await page.waitForSelector("shadow/together-back-button", {
-					visible: true,
-				});
-				const backBtn = await SignInArea.$("shadow/together-back-button");
-			} catch (e) {
-
-				messages.push("Back button is missing on Sign In page in " + app_name);
-			}
-
-			//located facebook link
-			try {
-				await page.waitForSelector("shadow/.facebook", {
-					visible: true,
-				});
-				const facebookButton = await SignInArea.$("shadow/.facebook");
-			} catch (e) {
-				console.log(e);
-				messages.push("Facebook button is missing on Sign In page in " + app_name);
-			}
-			//located apple button
-			try {
-				await page.waitForSelector("shadow/.apple", {
-					visible: true,
-				});
-				const appleButton = await SignInArea.$("shadow/.apple");
-			} catch (e) {
-				console.log(e);
-				messages.push("Apple button is missing on Sign In page in " + app_name);
-			}
-			//located google button
-			try {
-				await page.waitForSelector("shadow/.google", {
-					visible: true,
-				});
-				const googleButton = await SignInArea.$("shadow/.google");
-			} catch (e) {
-				console.log(e);
-				messages.push("Google button is missing on Sign In page in " + app_name);
-			}
-
-			try {
-				await page.waitForSelector("shadow/.signin-links together-highlight-text", {
-					visible: true,
-				});
-				const forgotLink = await SignInArea.$("shadow/.signin-links together-highlight-text");
-			} catch (e) {
-				console.log(e);
-				messages.push("Forgot Password link is missing on Sign In page in " + app_name);
-			}
-
-			try {
-				await page.waitForSelector("shadow/.signin-links ion-router-link", {
-					visible: true,
-				});
-				const signupLink = await SignInArea.$("shadow/.signin-links ion-router-link");
-			} catch (e) {
-				console.log(e);
-				messages.push("Sign up link is missing on Sign In page in " + app_name);
-			}
-
-			try {
-				await page.waitForSelector("shadow/div.footnotes > div:nth-child(2) > a:nth-child(1)", {
-					visible: true,
-				});
-				const privacyPolicy = await SignInArea.$("shadow/div.footnotes > div:nth-child(2) > a:nth-child(1)");
-			} catch (e) {
-				console.log(e);
-				messages.push("Privacy Policy link is missing on Sign In page in " + app_name);
-			}
-
-			try {
-				await page.waitForSelector("shadow/div.footnotes > div:nth-child(2) > a:nth-child(2)", {
-					visible: true,
-				});
-				const termsofUse = await SignInArea.$("shadow/div.footnotes > div:nth-child(2) > a:nth-child(2)");
-			} catch (e) {
-				console.log(e);
-				messages.push("Terms of use link is missing on Sign In page in " + app_name);
-			}
-
-		}
-		catch (e) {
-			console.log(e);
-			messages.push("SignIn container is missing in " + app_name);
-		}
-
-
-		errormsg = "";
-		messages.forEach(function (item) {
-			errormsg = errormsg + " " + item + "\n";
-		});
-
-		// Assertion for error message
-		expect(errormsg).to.equal('')
-
-	});
 
 	it('***Email Sign Up page ', async () => {
 		var messages = []; // Declared messages array to hold the errors
 
 		try { // Try for privacy popup
 
-			// Waited for app-prvary tag to load
-			await page.waitForSelector("shadow/div.left-panel", {
+			await page.waitForSelector("shadow/div.desktop.right-pane", {
 				visible: true,
-			});
-			const headerRightPane = await page.$("shadow/div.left-panel");  //locate app privacy pop-up
+			  });
+			const container = await page.$("shadow/div.desktop.right-pane");
 
-			const signupLink = await headerRightPane.$("shadow/ion-router-link");
-			await signupLink.click();  // Clicked Sign Up button
+			
+			//located ACCEPT button
+			const signup = await container.$("shadow/.together-button");
+			await signup.click(); // Clicked Sign Up button
 		//	await page.waitForNavigation();
 			try {
 
@@ -293,7 +173,7 @@ describe(app_name + ' Web Sign in / Sign Up ', async () => { // Started to new t
 					await emailAddress.click();
 					await page.waitFor(3000);
 				
-					await emailAddress.type(abc+"@gmail.com");
+					await emailAddress.type(abc+"@healthline.com");
 				} catch (e) {
 					console.log(e);
 					messages.push("EmailAddress fields is missing in " + app_name);
@@ -316,11 +196,11 @@ describe(app_name + ' Web Sign in / Sign Up ', async () => { // Started to new t
 				try { //Sign Up second screen
 
 					
-					await page.waitForSelector("app-registration:nth-child(3)", {
+					await page.waitForSelector("app-registration:nth-child(2)", {
 						visible: true,
 					});
 	 
-					const headerLeftPane1 = await page.$("app-registration:nth-child(3)");  //locate app privacy pop-up
+					const headerLeftPane1 = await page.$("app-registration:nth-child(2)");  //locate app privacy pop-up
 					
 									
 					try{
@@ -387,6 +267,14 @@ describe(app_name + ' Web Sign in / Sign Up ', async () => { // Started to new t
 					await signupButton.click();
 
 					await page.waitFor(5000);
+                    
+					try{
+						const posttogroup = await headerLeftPane1.$("shadow/together-feed-post-group-button");
+					}catch(e){
+						console.log(e);
+						messages.push("Group to post component is missing after SIGNUP " + app_name);
+					}
+
 
 				} catch (e) {
 					console.log(e);
@@ -403,43 +291,11 @@ describe(app_name + ' Web Sign in / Sign Up ', async () => { // Started to new t
 			console.log(e);
 			messages.push("Sign Up STEP-1 scrren is missing in " + app_name);
 		}
-//located login link from the header
-try {
-	await page.goto(URL, {
-		waitUntil: 'networkidle2',
-		// Remove the timeout
-		timeout: 0
-	});
-} catch (e) {
-	// Error will be catch here if element for 'Home' link is not located, then adding error message to messages
-	messages.push("Problem reloading the Page");
-}
-try {
-	await page.waitForSelector("shadow/div.desktop.right-pane", {
-		visible: true,
-	});
-	const headerRightPane = await page.$("shadow/div.desktop.right-pane");  //locate right pane from the header
-	
-	const logoutLink = await headerRightPane.$("shadow/.join-signin .together-highlight-text");
-	const txtLogout = await page.evaluate(logoutLink => logoutLink.innerText, logoutLink);
-	console.log("error message -->" + txtLogout);
-	if ((String(txtLogout).indexOf("Log out") == -1)) {
-		messages.push("After Sign In Log In link is not replaced by Log Out link.");
-	}
-	await logoutLink.click();
-	} catch (e) {
-		console.log(e);
-	messages.push("Logout link is missing in header after Sign In " + app_name);
-}
 
 		} catch (e) {
 			console.log(e);
 			messages.push("SignUp link is missing in " + app_name);
 		}
-
-
-
-
 
 		errormsg = "";
 		messages.forEach(function (item) {
@@ -449,10 +305,44 @@ try {
 		// Assertion for error message
 		expect(errormsg).to.equal('')
 
-		await page.waitFor(5000);
+		//await page.waitFor(5000);
 	});
 
-	it('*** Error Validation Email Sign In ', async () => {
+	it('*** Logout flow ', async () => {
+		var messages = []; // Declared messages array to hold the errors
+		//open home page
+
+		try {
+
+			await page.waitForSelector("shadow/.registered-options", {
+				visible: true,
+			});
+
+			const logoutLink = await page.$("shadow/.logout-link .together-highlight-text");
+			const txtLogout = await page.evaluate(logoutLink => logoutLink.innerText, logoutLink);
+			console.log("error message -->" + txtLogout);
+			if ((String(txtLogout).indexOf("Log out") == -1)) {
+				messages.push("After Sign Up Log out link is not displaying.");
+			}
+			await logoutLink.click();
+			await page.waitFor(15000);
+
+
+		} catch (e) {
+			console.log(e);
+			messages.push("Logout link is missing " + app_name);
+		}
+		errormsg = "";
+		messages.forEach(function (item) {
+			errormsg = errormsg + " " + item + "\n";
+		});
+
+		expect(errormsg).to.equal('')
+	});
+
+
+
+	xit('*** Error Validation Email Sign In ', async () => {
 		var messages = []; // Declared messages array to hold the errors
 
 		// Waited for app-prvary tag to load
@@ -563,21 +453,35 @@ try {
 		
 	});
 
-	it('*** Email Sign In flow ', async () => {
+	xit('*** Email Sign In flow ', async () => {
 		var messages = []; // Declared messages array to hold the errors
+		//open home page
+try {
+	await page.waitForSelector("div.desktop.right-pane", {
+		visible: true,
+	  });
+	const container = await page.$("div.desktop.right-pane");
+
+	
+	//located log in Link
+	const login = await container.$(".join-signin together-highlight-text");
+	await login.click(); // Clicked Sign Up button
+	await page.waitFor(5000);
+} catch (e) {
+	// Error will be catch here if element for 'Home' link is not located, then adding error message to messages
+	messages.push("Problem locating Login link");
+}
 
 		try {
 
-			await page.waitForSelector("shadow/div.together-signin-container", {
-				visible: true,
-			});
-			const signinContainer = await page.$("shadow/div.together-signin-container");
+			
+			const signinContainer = await page.$("shadow/app-signin");
 			try {
 
-				const emailAddress = await signinContainer.$("shadow/input[type = text]");
+				const emailAddress = await signinContainer.$("input[type = name]");
 				await emailAddress.click({ clickCount: 3 });
 				await emailAddress.press('Backspace');
-				await emailAddress.type(abc+"@gmail.com");
+				await emailAddress.type(abc+"@healthline.com");
 
 			} catch (e) {
 				console.log(e);
@@ -585,7 +489,7 @@ try {
 			}
 
 			try {
-				const password = await page.$$("shadow/input");
+				const password = await page.$$("input");
 				await password[1].click({ clickCount: 3 });
 				await password[1].press('Backspace');
 				await password[1].type('12345678');
@@ -595,19 +499,126 @@ try {
 				messages.push("Password is missing " + app_name);
 			}
 
-			const eyeIcon = await signinContainer.$("shadow/div.right-icon");
+			const eyeIcon = await signinContainer.$("div.right-icon");
 			await eyeIcon.click();
 
 			try {
-				const login = await signinContainer.$("shadow/together-button");
+				const login = await signinContainer.$("together-button");
 				await login.click();
 			} catch (e) {
 				console.log(e);
 				messages.push("Login button is missing " + app_name);
 			}
 
-//located login link from the header
+
+		} catch (e) {
+			console.log(e);
+			messages.push("SignIn container is missing " + app_name);
+		}
+		errormsg = "";
+		messages.forEach(function (item) {
+			errormsg = errormsg + " " + item + "\n";
+		});
+
+		expect(errormsg).to.equal('')
+	});
+
+
+	xit('*** Delete account flow', async () => {
+		var messages = []; // Declared messages array to hold the errors
+		//open home page
+try {
+	await page.waitForSelector("shadow/div.desktop.right-pane", {
+		visible: true,
+	  });
+	const container = await page.$("shadow/div.desktop.right-pane");
+
+	
+	//located log in Link
+	const login = await container.$(".join-signin together-highlight-text");
+	await login.click(); // Clicked Sign Up button
+
+} catch (e) {
+	// Error will be catch here if element for 'Home' link is not located, then adding error message to messages
+	messages.push("Problem locating Login link");
+}
+
+		try {
+
+			await page.waitForSelector("div.together-signin-container", {
+				visible: true,
+			});
+			const signinContainer = await page.$("div.together-signin-container");
+			try {
+
+				const emailAddress = await signinContainer.$("input[type = name]");
+				await emailAddress.click({ clickCount: 3 });
+				await emailAddress.press('Backspace');
+				await emailAddress.type(abc+"@healthline.com");
+
+			} catch (e) {
+				console.log(e);
+				messages.push("EmailAddress field is missing " + app_name);
+			}
+
+			try {
+				const password = await page.$$("input");
+				await password[1].click({ clickCount: 3 });
+				await password[1].press('Backspace');
+				await password[1].type('12345678');
+
+			} catch (e) {
+				console.log(e);
+				messages.push("Password is missing " + app_name);
+			}
+
+			const eyeIcon = await signinContainer.$("div.right-icon");
+			await eyeIcon.click();
+
+			try {
+				const login = await signinContainer.$("together-button");
+				await login.click();
+			} catch (e) {
+				console.log(e);
+				messages.push("Login button is missing " + app_name);
+			}
+
+//located delete link from the header
 await page.waitFor(5000);
+try {
+	await page.waitForSelector("shadow/div.registered-options", {
+		visible: true,
+	});
+	const deleteContainer = await page.$("shadow/div.registered-options");  //locate right pane from the header
+	
+	const deleteLink = await deleteContainer.$("shadow/.delete-link .together-highlight-text");
+	const txtDelete = await page.evaluate(deleteLink => deleteLink.innerText, deleteLink);
+	console.log("Delete message -->" + txtDelete);
+	if ((String(txtDelete).indexOf("Delete Account") == -1)) {
+		messages.push("Delete account button in popup is not displaying.");
+	}
+	await deleteLink.click();
+	await page.waitFor(5000);
+    //confirmation Popup
+	try{
+		const deleteBtns = await page.$("shadow/div.confirmation-footer");  //locate right pane from the header
+	
+		const deleteBtn = await deleteBtns.$$("shadow/div");
+		const txtDelete1 = await page.evaluate(deleteBtn => deleteBtn.innerText, deleteBtn);
+	console.log("Delete message -->" + txtDelete1);	
+		await deleteBtn[1].click();
+
+	} catch (e) {
+		console.log(e);
+	messages.push("Delete link is missing in LHS Navigation" + app_name);
+}
+}catch (e) {
+		console.log(e);
+	messages.push("Delete link is missing in LHS Navigation" + app_name);
+}
+
+
+/*
 try {
 	await page.waitForSelector("shadow/div.desktop.right-pane", {
 		visible: true,
@@ -624,7 +635,7 @@ try {
 	} catch (e) {
 		console.log(e);
 	messages.push("Logout link is missing in header after Sign In " + app_name);
-}
+}*/
 		} catch (e) {
 			console.log(e);
 			messages.push("SignIn container is missing " + app_name);
