@@ -240,15 +240,11 @@ describe(app_name + ' Web Sign in / Sign Up ', async () => { // Started to new t
 			if(comments.length<=1){
 				messages.push("On All Replies page only one comment");
 			}
+			/*
 			try { 
-				await page.waitFor(5000);
-				// Click back link from All Replies screen
-			//	await page.waitForSelector("shadow/.together-back-button", {
-			//		visible: true,
-			//	  });
+				await page.waitFor(15000);
+				
 				const backLnk = await page.$$("shadow/.together-back-button");
-				//const lnkTxt1 = await page.evaluate(backLnk => backLnk.innerText, backLnk);
-				//console.log(lnkTxt1);
 				await backLnk[1].click();
 				console.log("back is clicked");
 			} catch (e) {
@@ -256,6 +252,7 @@ describe(app_name + ' Web Sign in / Sign Up ', async () => { // Started to new t
 				// Error will be catch here if element for 'Back' link is not located, then adding error message to messages
 				messages.push("Back Link is missing on All Replies screern");
 			}
+			*/
 		} catch (e) {
 			console.log(e);
 			// Error will be catch here if element for 'See all replies' is not located, then adding error message to messages
@@ -775,7 +772,7 @@ try {
 		var messages = []; // Declared messages array to hold the errors
 		await page.goto(URL, {
 			waitUntil: 'networkidle2',
-			// Remove the timeout
+			// Remove the timeout\y
 			timeout: 0
 		});
 
