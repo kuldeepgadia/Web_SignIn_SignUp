@@ -82,8 +82,8 @@ describe(app_name + ' Web Sign in / Sign Up ', async () => { // Started to new t
 			// Remove the timeout
 			timeout: 0
 		});
-		await page.setDefaultTimeout(50000);
-		await page.setDefaultNavigationTimeout(50000);
+		await page.setDefaultTimeout(90000);
+		await page.setDefaultNavigationTimeout(90000);
 	});
 
 	after(async function () { /* After hook for mocah testing, This code will be executed after each testcases */
@@ -430,7 +430,7 @@ describe(app_name + ' Web Sign in / Sign Up ', async () => { // Started to new t
 			//located ACCEPT button
 			const signup = await container.$("shadow/.together-button");
 			await signup.click(); // Clicked Sign Up button
-			await page.waitForNavigation();
+			//await page.waitForNavigation();
 			try {
 
 				await page.waitForSelector("app-registration", {
@@ -737,7 +737,7 @@ try {
 		const deleteBtn = await deleteBtns.$$("shadow/div");
 	
 		await deleteBtn[1].click();
-
+        await page.waitFor(9000);
 		try {
 			await page.waitForSelector("div.desktop .right-pane", {
 				visible: true,
